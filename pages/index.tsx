@@ -28,15 +28,15 @@ export async function getStaticProps({ locale }: { locale: string }) {
   }
 }
 
-const metaTitle = 'Mango Markets | High-Performance Crypto Exchange'
+const metaTitle = 'Peach | DeFi Lending Protocol'
 const metaDescription =
-  'Margin trade your favorite crypto assets on-chain. Groundbreaking risk management to keep your funds safe. A powerful DEX, powered by Solana.'
+  'Borrow and lend crypto assets on-chain with robust risk management and capital efficiency provided by Peach, the premier DeFi lending protocol on Solana.'
 
 const Index: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Mango Markets</title>
+        <title>Peach</title>
         <meta name="description" content={metaDescription} />
         <meta property="og:title" content={metaTitle} />
         <meta name="og:description" content={metaDescription} />

@@ -100,12 +100,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logos/logo.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="apple-touch-icon"
-          sizes="192x192"
-          href="/apple-touch-icon.png"
-        />
+        <link rel="apple-touch-icon" sizes="192x192" href="/logos/logo.png" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -208,8 +205,8 @@ const PageTitle = () => {
     market && selectedMarket && router.pathname == '/trade'
       ? `${price?.toFixed(getDecimalCount(market.tickSize))} ${
           selectedMarket.name
-        } - Mango`
-      : 'Mango Markets'
+        } - Peach`
+      : 'Peach'
 
   return (
     <Head>

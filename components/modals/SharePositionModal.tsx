@@ -99,7 +99,7 @@ const SharePositionModal = ({
                 <img
                   className="mb-8 h-7 w-auto shrink-0"
                   src="/logos/logo-with-text.svg"
-                  alt="Mango"
+                  alt="Peach"
                 />
                 <div className="mb-4 flex items-center">
                   <p

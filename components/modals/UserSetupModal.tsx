@@ -273,7 +273,7 @@ const UserSetupModal = ({
         />
         <img
           className={`absolute left-6 top-6 h-10 w-10 shrink-0`}
-          src="/logos/logo-mark.svg"
+          src="/logos/logo.png"
           alt="next"
         />
         <div className="absolute left-0 top-0 z-10 flex h-1.5 w-full grow bg-th-bkg-3">
