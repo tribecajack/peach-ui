@@ -18,9 +18,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@store/*": ["store/*"],
-      "@public/charting_library": [
-        "public/charting_library/charting_library.d.ts"
-      ],
+      "@public/charting_library": ["public/charting_library"],
       "@public/charting_library/*": ["public/charting_library/*"]
     }
   },
