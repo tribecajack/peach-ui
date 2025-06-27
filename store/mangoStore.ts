@@ -69,6 +69,7 @@ import {
 } from 'types'
 import spotBalancesUpdater from './spotBalancesUpdater'
 import { PerpMarket } from '@blockworks-foundation/mango-v4'
+import type { PerpMarketIndex } from '@blockworks-foundation/mango-v4'
 import perpPositionsUpdater from './perpPositionsUpdater'
 import {
   DEFAULT_PRIORITY_FEE,
@@ -78,7 +79,7 @@ import {
 import {
   IExecutionLineAdapter,
   IOrderLineAdapter,
-} from '@public/charting_library/charting_library'
+} from '@public/charting_library'
 import { nftThemeMeta } from 'utils/theme'
 import { OrderTypes } from 'utils/tradeForm'
 import { usePlausible } from 'next-plausible'
@@ -807,11 +808,13 @@ const mangoStore = create<MangoStore>()(
             ]
             await Promise.all(
               activePerpMarketIndices.map(async (perpMktIndex) => {
-                const market = group.getPerpMarketByMarketIndex(perpMktIndex)
+                const market = group.getPerpMarketByMarketIndex(
+                  perpMktIndex as PerpMarketIndex,
+                )
                 const orders = await mangoAccount.loadPerpOpenOrdersForMarket(
                   client,
                   group,
-                  perpMktIndex,
+                  perpMktIndex as PerpMarketIndex,
                   market._bids ? false : true,
                 )
                 openOrders[market.publicKey.toString()] = orders
