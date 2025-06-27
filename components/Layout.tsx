@@ -15,7 +15,6 @@ import TopBar from './TopBar'
 import useLocalStorageState from '../hooks/useLocalStorageState'
 import {
   ACCEPT_TERMS_KEY,
-  NON_RESTRICTED_JURISDICTION_KEY,
   SECONDS,
   SIDEBAR_COLLAPSE_KEY,
   SLOTS_WARNING_KEY,
@@ -40,8 +39,6 @@ import TokenSlotsWarningModal, {
 import useMangoAccount from 'hooks/useMangoAccount'
 import useUnownedAccount from 'hooks/useUnownedAccount'
 import NewListingBanner from './NewListingBanner'
-import useIpAddress from 'hooks/useIpAddress'
-import RestrictedCountryModal from './modals/RestrictedCountryModal'
 import useCollateralFeePositions from 'hooks/useCollateralFeePositions'
 import CollateralFeeWarningModal from './modals/CollateralFeeWarningModal'
 
@@ -176,7 +173,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </div>
         <DeployRefreshManager />
         <TermsOfUse />
-        <RestrictedCountryCheck />
         {showSlotsNearlyFullWarning ? (
           <TokenSlotsWarningModal
             isOpen={showSlotsNearlyFullWarning}
@@ -222,29 +218,6 @@ const TermsOfUse = () => {
       ) : null}
     </>
   )
-}
-
-// this will only show if the ip api doesn't return the country
-const RestrictedCountryCheck = () => {
-  const { ipCountry, loadingIpCountry } = useIpAddress()
-  const groupLoaded = mangoStore((s) => s.groupLoaded)
-  const [confirmedCountry, setConfirmedCountry] = useLocalStorageState(
-    NON_RESTRICTED_JURISDICTION_KEY,
-    false,
-  )
-
-  const showModal = useMemo(() => {
-    return !confirmedCountry && !ipCountry && !loadingIpCountry && groupLoaded
-  }, [confirmedCountry, ipCountry, loadingIpCountry, groupLoaded])
-
-  return showModal ? (
-    <RestrictedCountryModal
-      isOpen={showModal}
-      onClose={() => {
-        setConfirmedCountry(true)
-      }}
-    />
-  ) : null
 }
 
 function DeployRefreshManager(): JSX.Element | null {
