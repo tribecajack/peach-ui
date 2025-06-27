@@ -1,6 +1,7 @@
 const { i18n } = require('./next-i18next.config')
 const webpack = require('webpack')
 const { withSentryConfig } = require('@sentry/nextjs')
+const path = require('path')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -50,6 +51,15 @@ const nextConfig = {
         },
       }),
     )
+
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@public': path.join(__dirname, 'public'),
+      '@public/charting_library': path.join(
+        __dirname,
+        'public/charting_library/charting_library.js',
+      ),
+    }
 
     return config
   },
