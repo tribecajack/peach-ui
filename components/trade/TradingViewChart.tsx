@@ -55,6 +55,7 @@ import useThemeWrapper from 'hooks/useThemeWrapper'
 import { handleCancelTriggerOrder } from '@components/swap/SwapTriggerOrders'
 import useAnalytics from 'hooks/useAnalytics'
 import { WRAPPED_SOL_MINT } from '@metaplex-foundation/js'
+import type { PerpMarketIndex } from '@blockworks-foundation/mango-v4'
 
 export interface ChartContainerProps {
   container: ChartingLibraryWidgetOptions['container']
@@ -290,7 +291,7 @@ const TradingViewChart = () => {
         const tx = await client.perpCancelOrder(
           group,
           mangoAccount,
-          o.perpMarketIndex,
+          o.perpMarketIndex as PerpMarketIndex,
           o.orderId,
         )
         actions.fetchOpenOrders()
@@ -378,7 +379,7 @@ const TradingViewChart = () => {
                 orderSide: side.toUpperCase(),
                 orderPrice: formatNumericValue(order.price, tickSizeDecimals),
               }),
-              callback: (res) => {
+              callback: (res: boolean) => {
                 if (res) {
                   if (order instanceof PerpOrder) {
                     cancelPerpOrder(order)
@@ -492,7 +493,7 @@ const TradingViewChart = () => {
                 orderSide: side.toUpperCase(),
                 orderPrice: formatNumericValue(price, tickSizeDecimals),
               }),
-              callback: (res) => {
+              callback: (res: boolean) => {
                 if (res) {
                   handleCancelTriggerOrder(order.id)
                 }
@@ -782,7 +783,7 @@ const TradingViewChart = () => {
         custom_formatters: {
           priceFormatterFactory: () => {
             return {
-              format: (price) => {
+              format: (price: number) => {
                 // return the appropriate format
                 return formatPrice(price)
               },
@@ -829,7 +830,10 @@ const TradingViewChart = () => {
   // set a limit price from right click context menu
   useEffect(() => {
     if (chartReady && tvWidgetRef.current) {
-      tvWidgetRef.current.onContextMenu(function (unixtime, price) {
+      tvWidgetRef.current.onContextMenu(function (
+        unixtime: number,
+        price: number,
+      ) {
         return [
           {
             position: 'top',
